@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Buy Product</h2>
+    <div class="form-container">
+        <form action="{{ url_for('buy') }}" method="post">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="product_name" value="{{ request.args.get('product_name') }}">
+                <label for="product_name">Product Name:</label>
+                <input type="text" name="product_name_display" class="form-control" id="product_name" value="{{ request.args.get('product_name') }}" readonly>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="price" value="{{ request.args.get('price') }}">
+                <label for="price">Price:</label>
+                <input type="text" name="price_display" class="form-control" id="price" value="{{ request.args.get('price') }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" class="form-control" id="quantity" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function goToBuyPage(productName, price) {
+        const quantity = prompt("Enter quantity:");
+        const quantityNum = parseInt(quantity, 10);
+
+        // Validate quantity input
+        if (quantity && !isNaN(quantityNum) && quantityNum > 0) {
+            const totalPrice = price * quantityNum;
+            const confirmation = confirm(`Total Price: $${totalPrice}. Proceed to buy?`);
+
+            if (confirmation) {
+                const buyUrl = `/buy?product_name=${encodeURIComponent(productName)}&price=${totalPrice}&quantity=${quantityNum}`;
+                window.location.href = buyUrl;
+            }
+        } else {
+            alert("Invalid quantity. Please enter a positive number.");
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h2 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-info {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-info:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+    <title>Product List</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Product List</h2>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename=product[6]) }}" class="card-img-top" alt="{{ product[1] }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product[1] }}</h5>
+                        <p class="card-text">Category: {{ product[2] }}</p>
+                        <p class="card-text">Price: ${{ product[3] }}</p>
+                        <p class="card-text">Quantity: {{ product[4] }}</p>
+                        <p class="card-text">{{ product[5] }}</p>
+                        <a href="{{ url_for('product', product_id=product[0]) }}" class="btn btn-info">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

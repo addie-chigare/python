@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <style>
+        body {
+            background-image: url('https://th.bing.com/th/id/OIP.b2DuI6JoHaO_s8Bu-n1c0gHaE7?w=274&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+        }
+        .welcome-text {
+            text-align: center;
+            margin-top: 200px;
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .navbar {
+            padding: 1rem;
+            background-color: rgba(255, 255, 0, 0.8); /* Semi-transparent yellow */
+        }
+        .nav-link {
+            color: #000 !important; /* Black color for links */
+        }
+        .nav-link:hover {
+            color: #0056b3 !important; /* Darker blue on hover */
+        }
+        .nav-item:last-child {
+            margin-left: auto; /* Push admin login to the right */
+        }
+        .hero-text {
+            font-size: 2.5rem;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .cta-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            color: #fff;
+            background-color: #007bff; /* Bootstrap primary color */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .cta-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">E-com</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('signup') }}">Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('product_list', product_id=1) }}">Product Page</a> <!-- Use an actual product ID -->
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+<h1 class="welcome-text">Welcome to Shanti Mall</h1>
+<p class="hero-text">Your one-stop-shop for all your e-commerce needs!</p>
+<a href="{{ url_for('product', product_id=1) }}" class="cta-button">Explore Products
